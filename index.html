@@ -1,466 +1,825 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Meet interesting people near you. Start chatting and connect with singles in your area today.">
-    <meta name="keywords" content="dating, meet people, singles, chat, relationships">
-    <title>Meet Singles Near You - Start Dating Today</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spark — Dating Landing</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+  <!-- DO NOT MODIFY -->
+  <!-- Quora Pixel Code (JS Helper) -->
+  <script>
+  !function(q,e,v,n,t,s){if(q.qp) return; n=q.qp=function(){n.qp?n.qp.apply(n,arguments):n.queue.push(arguments);}; n.queue=[];t=document.createElement(e);t.async=!0;t.src=v; s=document.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);}(window, 'script', 'https://a.quora.com/qevents.js');
+  qp('init', '81648c2480c5423b9abaad03749d1fed');
+  qp('track', 'ViewContent');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://q.quora.com/_/ad/81648c2480c5423b9abaad03749d1fed/pixel?tag=ViewContent&noscript=1"/></noscript>
+  <!-- End of Quora Pixel Code -->
+  <script>qp('track', 'Generic');</script>
 
-        .container {
-            max-width: 500px;
-            width: 100%;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-            animation: slideUp 0.5s ease-out;
-        }
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    body{
+      font-family:'Inter',sans-serif;
+      background:#05030d;
+      color:white;
+      overflow-x:hidden;
+    }
 
-        .header {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 40px 30px;
-            text-align: center;
-            color: white;
-        }
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-        .header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
+    .bg-glow{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      overflow:hidden;
+    }
 
-        .header p {
-            font-size: 16px;
-            opacity: 0.95;
-        }
+    .glow-1{
+      position:absolute;
+      width:700px;
+      height:700px;
+      background:rgba(255,0,128,.18);
+      filter:blur(120px);
+      border-radius:50%;
+      top:-200px;
+      right:-100px;
+    }
 
-        .content {
-            padding: 40px 30px;
-        }
+    .glow-2{
+      position:absolute;
+      width:600px;
+      height:600px;
+      background:rgba(109,40,217,.15);
+      filter:blur(120px);
+      border-radius:50%;
+      bottom:-200px;
+      left:-150px;
+    }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 35px;
-            text-align: center;
-        }
+    .container{
+      width:min(1250px,92%);
+      margin:auto;
+    }
 
-        .stat-item {
-            background: #f8f9fa;
-            padding: 20px 10px;
-            border-radius: 12px;
-        }
+    /* NAVBAR */
 
-        .stat-number {
-            font-size: 24px;
-            font-weight: 700;
-            color: #f5576c;
-            margin-bottom: 5px;
-        }
+    nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:28px 0;
+    }
 
-        .stat-label {
-            font-size: 12px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:28px;
+      font-weight:800;
+    }
 
-        .features {
-            margin-bottom: 30px;
-        }
+    .logo span{
+      color:#ff3c82;
+    }
 
-        .feature {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 18px;
-        }
+    .nav-links{
+      display:flex;
+      gap:38px;
+      color:#b8b6c7;
+      font-weight:500;
+    }
 
-        .feature-icon {
-            width: 24px;
-            height: 24px;
-            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 14px;
-            flex-shrink: 0;
-            margin-right: 15px;
-        }
+    .nav-right{
+      display:flex;
+      align-items:center;
+      gap:24px;
+    }
 
-        .feature-text {
-            color: #333;
-            font-size: 15px;
-            line-height: 1.5;
-        }
+    .sign-in{
+      color:#c7c4d8;
+      font-weight:500;
+    }
 
-        .cta-section {
-            text-align: center;
-            margin-top: 35px;
-        }
+    .btn{
+      background:linear-gradient(135deg,#ff2d7a,#8f5bff);
+      border:none;
+      color:white;
+      padding:15px 28px;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.3s ease;
+      box-shadow:0 10px 30px rgba(255,0,128,.25);
+    }
 
-        .cta-button {
-            display: block;
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
-            margin-bottom: 15px;
-        }
+    .btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 15px 40px rgba(255,0,128,.35);
+    }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
-        }
+    /* HERO */
 
-        .cta-button:active {
-            transform: translateY(0);
-        }
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      align-items:center;
+      min-height:calc(100vh - 100px);
+      gap:60px;
+      padding:40px 0 80px;
+    }
 
-        .secure-text {
-            font-size: 13px;
-            color: #999;
-            margin-top: 15px;
-        }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 18px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      color:#d6d3e4;
+      margin-bottom:34px;
+      backdrop-filter:blur(12px);
+    }
 
-        .testimonials {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-        }
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:#32ff87;
+      box-shadow:0 0 12px #32ff87;
+    }
 
-        .testimonial {
-            margin-bottom: 20px;
-        }
+    h1{
+      font-size:clamp(58px,7vw,96px);
+      line-height:.95;
+      font-weight:900;
+      letter-spacing:-4px;
+      margin-bottom:30px;
+    }
 
-        .testimonial:last-child {
-            margin-bottom: 0;
-        }
+    h1 .gradient{
+      background:linear-gradient(135deg,#ff2d7a,#b06cff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
 
-        .testimonial-text {
-            font-size: 14px;
-            color: #555;
-            font-style: italic;
-            margin-bottom: 8px;
-            line-height: 1.6;
-        }
+    .hero p{
+      color:#a9a6ba;
+      font-size:22px;
+      line-height:1.7;
+      max-width:620px;
+      margin-bottom:42px;
+    }
 
-        .testimonial-author {
-            font-size: 13px;
-            color: #f5576c;
-            font-weight: 600;
-        }
+    .hero-buttons{
+      display:flex;
+      gap:18px;
+      margin-bottom:55px;
+      flex-wrap:wrap;
+    }
 
-        .pulse-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #4ade80;
-            border-radius: 50%;
-            margin-right: 6px;
-            animation: pulse 2s infinite;
-        }
+    .btn-secondary{
+      background:transparent;
+      border:1px solid rgba(255,255,255,.12);
+      padding:15px 28px;
+      border-radius:999px;
+      color:white;
+      font-weight:600;
+      backdrop-filter:blur(10px);
+      transition:.3s ease;
+    }
 
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-        }
+    .btn-secondary:hover{
+      background:rgba(255,255,255,.05);
+    }
 
-        .online-status {
-            background: #ecfdf5;
-            border: 1px solid #4ade80;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            text-align: center;
-            font-size: 14px;
-            color: #333;
-        }
+    .stats{
+      display:flex;
+      gap:45px;
+      flex-wrap:wrap;
+    }
 
-        .disclaimer {
-            font-size: 11px;
-            color: #999;
-            text-align: center;
-            line-height: 1.5;
-            margin-top: 20px;
-        }
+    .stat{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
 
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 24px;
-            }
+    .stat-icon{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      background:rgba(255,0,128,.12);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#ff4f91;
+      font-size:18px;
+    }
 
-            .stats {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
+    .stat h3{
+      font-size:28px;
+      margin-bottom:4px;
+    }
 
-            .content {
-                padding: 30px 20px;
-            }
+    .stat span{
+      color:#8f8aa5;
+      font-size:14px;
+    }
 
-            .stat-item {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                text-align: left;
-            }
+    /* PHONE */
 
-            .stat-number {
-                order: 2;
-            }
+    .phone-wrapper{
+      position:relative;
+      display:flex;
+      justify-content:center;
+    }
 
-            .stat-label {
-                order: 1;
-            }
-        }
+    .phone{
+      width:360px;
+      height:720px;
+      border-radius:42px;
+      background:linear-gradient(180deg,#12111f,#090912);
+      border:1px solid rgba(255,255,255,.08);
+      position:relative;
+      overflow:hidden;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.04),
+        0 40px 80px rgba(0,0,0,.6),
+        0 0 80px rgba(255,0,128,.18);
+    }
 
-        /* Loading overlay для редиректа */
-        .loading-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(102, 126, 234, 0.95);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
+    .phone::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
+        180deg,
+        rgba(255,255,255,.04),
+        transparent
+      );
+      pointer-events:none;
+    }
 
-        .loading-overlay.active {
-            display: flex;
-        }
+    .card-image{
+      position:absolute;
+      inset:20px;
+      border-radius:30px;
+      overflow:hidden;
+    }
 
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+    .card-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+    .overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
+        180deg,
+        transparent 40%,
+        rgba(0,0,0,.9)
+      );
+    }
 
-        .loading-text {
-            color: white;
-            font-size: 18px;
-            margin-top: 20px;
-            font-weight: 600;
-        }
-    </style>
+    .profile-info{
+      position:absolute;
+      bottom:110px;
+      left:38px;
+      z-index:3;
+    }
+
+    .profile-info h2{
+      font-size:40px;
+      margin-bottom:8px;
+    }
+
+    .profile-info p{
+      color:#d8d5e5;
+      margin-bottom:10px;
+    }
+
+    .actions{
+      position:absolute;
+      bottom:28px;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      gap:24px;
+      z-index:5;
+    }
+
+    .action{
+      width:70px;
+      height:70px;
+      border-radius:50%;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:28px;
+      backdrop-filter:blur(10px);
+      transition:.3s ease;
+    }
+
+    .action:hover{
+      transform:scale(1.08);
+    }
+
+    .action.heart{
+      background:linear-gradient(135deg,#ff2d7a,#9d5cff);
+      box-shadow:0 15px 40px rgba(255,0,128,.4);
+    }
+
+    .floating{
+      position:absolute;
+      background:rgba(17,16,28,.92);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:20px;
+      padding:14px 18px;
+      backdrop-filter:blur(20px);
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .match-box{
+      top:70px;
+      right:20px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .match-box img{
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      object-fit:cover;
+    }
+
+    .typing{
+      left:-40px;
+      top:280px;
+    }
+
+    .online{
+      right:10px;
+      bottom:100px;
+    }
+
+    .small{
+      color:#9b97ad;
+      font-size:14px;
+      margin-top:4px;
+    }
+
+    @media(max-width:1100px){
+
+      .hero{
+        grid-template-columns:1fr;
+        padding-top:20px;
+      }
+
+      .hero-left{
+        text-align:center;
+      }
+
+      .hero p{
+        margin-inline:auto;
+      }
+
+      .hero-buttons,
+      .stats{
+        justify-content:center;
+      }
+
+      .phone-wrapper{
+        margin-top:30px;
+      }
+    }
+
+    /* HOW IT WORKS */
+
+    .section-label{
+      text-align:center;
+      color:#ff3c82;
+      font-weight:700;
+      letter-spacing:2px;
+      font-size:13px;
+      text-transform:uppercase;
+      margin-bottom:16px;
+    }
+
+    .section-title{
+      text-align:center;
+      font-size:clamp(36px,5vw,58px);
+      font-weight:900;
+      letter-spacing:-2px;
+      margin-bottom:18px;
+    }
+
+    .section-sub{
+      text-align:center;
+      color:#8f8aa5;
+      font-size:18px;
+      max-width:560px;
+      margin:0 auto 70px;
+      line-height:1.7;
+    }
+
+    .how-section{
+      padding:100px 0;
+    }
+
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:32px;
+    }
+
+    .step{
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:28px;
+      padding:40px 32px;
+      position:relative;
+      transition:.3s ease;
+    }
+
+    .step:hover{
+      border-color:rgba(255,61,130,.3);
+      transform:translateY(-4px);
+    }
+
+    .step-num{
+      font-size:72px;
+      font-weight:900;
+      color:rgba(255,61,130,.08);
+      line-height:1;
+      margin-bottom:16px;
+    }
+
+    .step-icon{
+      font-size:36px;
+      margin-bottom:20px;
+    }
+
+    .step h3{
+      font-size:22px;
+      margin-bottom:12px;
+    }
+
+    .step p{
+      color:#8f8aa5;
+      line-height:1.7;
+      font-size:16px;
+    }
+
+    /* TESTIMONIALS */
+
+    .testimonials-section{
+      padding:80px 0;
+    }
+
+    .cards-row{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+    }
+
+    .tcard{
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:24px;
+      padding:32px;
+    }
+
+    .tcard .stars{
+      color:#ffb347;
+      font-size:18px;
+      margin-bottom:16px;
+    }
+
+    .tcard .quote{
+      color:#c7c4d8;
+      font-size:16px;
+      line-height:1.75;
+      margin-bottom:24px;
+    }
+
+    .tcard .author{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .tcard .author img{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      object-fit:cover;
+    }
+
+    .tcard .author strong{
+      display:block;
+      font-size:15px;
+    }
+
+    .tcard .author span{
+      color:#8f8aa5;
+      font-size:13px;
+    }
+
+    /* CTA */
+
+    .cta-section{
+      padding:80px 0 120px;
+    }
+
+    .cta-box{
+      background:linear-gradient(135deg,rgba(255,45,122,.12),rgba(143,91,255,.12));
+      border:1px solid rgba(255,45,122,.2);
+      border-radius:36px;
+      padding:80px 60px;
+      text-align:center;
+    }
+
+    .cta-box h2{
+      font-size:clamp(38px,5vw,60px);
+      font-weight:900;
+      letter-spacing:-2px;
+      margin-bottom:18px;
+    }
+
+    .cta-box p{
+      color:#8f8aa5;
+      font-size:18px;
+      margin-bottom:40px;
+    }
+
+    @media(max-width:900px){
+      .steps,.cards-row{grid-template-columns:1fr;}
+      .cta-box{padding:50px 28px;}
+    }
+
+    @media(max-width:768px){
+
+      .nav-links{
+        display:none;
+      }
+
+      h1{
+        letter-spacing:-2px;
+      }
+
+      .phone{
+        width:320px;
+        height:650px;
+      }
+
+      .profile-info h2{
+        font-size:32px;
+      }
+
+      .floating{
+        transform:scale(.9);
+      }
+    }
+
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>💕 Meet Singles Near You</h1>
-            <p>Connect with interesting people in your area today</p>
+
+  <div class="bg-glow">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <div class="container">
+
+    <nav>
+
+      <div class="logo">
+        <span>❤</span> spark.
+      </div>
+
+      <div class="nav-links">
+        <a href="#how">How It Works</a>
+        <a href="#register">AI Matching</a>
+        <a href="#testimonials">Stories</a>
+        <a href="#register">Premium</a>
+      </div>
+
+      <div class="nav-right">
+        <a href="#register" class="sign-in">Sign In</a>
+        <a href="#register" class="btn" onclick="qp('track','Generic')">Get Started Free</a>
+      </div>
+
+    </nav>
+
+    <section class="hero">
+
+      <div class="hero-left">
+
+        <div class="badge">
+          <div class="dot"></div>
+          12,671 people matched today
         </div>
 
-        <div class="content">
-            <div class="online-status">
-                <span class="pulse-dot"></span>
-                <strong>3,847 singles online now</strong> in your area
-            </div>
+        <h1>
+          Find someone<br>
+          who feels like<br>
+          <span class="gradient">home.</span>
+        </h1>
 
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number">2.5M+</div>
-                    <div class="stat-label">Members</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">18K+</div>
-                    <div class="stat-label">Daily Matches</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">Free</div>
-                    <div class="stat-label">To Join</div>
-                </div>
-            </div>
+        <p>
+          Real people. Real chemistry. Zero awkwardness.
+          Your next chapter starts with one swipe.
+        </p>
 
-            <div class="features">
-                <div class="feature">
-                    <div class="feature-icon">✓</div>
-                    <div class="feature-text">
-                        <strong>Browse profiles</strong> of singles in your area looking to meet someone like you
-                    </div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">✓</div>
-                    <div class="feature-text">
-                        <strong>Start chatting instantly</strong> with members who match your interests
-                    </div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">✓</div>
-                    <div class="feature-text">
-                        <strong>100% verified profiles</strong> - real people, real connections
-                    </div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">✓</div>
-                    <div class="feature-text">
-                        <strong>Private & secure</strong> - your information is always protected
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonials">
-                <div class="testimonial">
-                    <div class="testimonial-text">"I met my partner here 3 months ago. Best decision I ever made!"</div>
-                    <div class="testimonial-author">— Sarah, 28</div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-text">"So many interesting people to chat with. Finally a dating site that works!"</div>
-                    <div class="testimonial-author">— Mike, 32</div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-text">"Easy to use and I got matches on my first day. Highly recommend!"</div>
-                    <div class="testimonial-author">— Jennifer, 26</div>
-                </div>
-            </div>
-
-            <div class="cta-section">
-                <button class="cta-button" id="joinBtn">
-                    Join Free Now - Start Chatting!
-                </button>
-                <div class="secure-text">
-                    🔒 Secure & Private • No Credit Card Required
-                </div>
-            </div>
-
-            <div class="disclaimer">
-                By clicking "Join Free Now", you agree to our Terms of Service and Privacy Policy.
-                You must be 18 years or older to register. Photos are for illustrative purposes.
-            </div>
+        <div class="hero-buttons">
+          <a href="#register" class="btn" onclick="qp('track','Generic')">Start Matching →</a>
         </div>
-    </div>
 
-    <!-- Loading overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="spinner"></div>
-        <div class="loading-text">Finding matches near you...</div>
-    </div>
+        <div class="stats">
 
-    <script>
-        // === НАСТРОЙ ЭТИ ПАРАМЕТРЫ ===
+          <div class="stat">
+            <div class="stat-icon">♡</div>
+            <div>
+              <h3>2.0M+</h3>
+              <span>Active Users</span>
+            </div>
+          </div>
 
-        // Твой реальный дейтинг оффер URL
-        const OFFER_URL = 'https://your-dating-offer.com/?affid=123';
+          <div class="stat">
+            <div class="stat-icon">🔥</div>
+            <div>
+              <h3>850K+</h3>
+              <span>Matches Made</span>
+            </div>
+          </div>
 
-        // Задержка перед редиректом (в миллисекундах)
-        const REDIRECT_DELAY = 1500;
+          <div class="stat">
+            <div class="stat-icon">⚡</div>
+            <div>
+              <h3>3s</h3>
+              <span>New Match Every</span>
+            </div>
+          </div>
 
-        // Автоматический редирект через N секунд (0 = отключено, редирект только по кнопке)
-        const AUTO_REDIRECT_SECONDS = 0;
+        </div>
 
-        // === ОСНОВНОЙ КОД ===
+      </div>
 
-        // Редирект по клику на кнопку
-        document.getElementById('joinBtn').addEventListener('click', function() {
-            // Показываем loading
-            document.getElementById('loadingOverlay').classList.add('active');
+      <div class="phone-wrapper">
 
-            // Редирект через заданное время
-            setTimeout(function() {
-                window.location.href = OFFER_URL;
-            }, REDIRECT_DELAY);
-        });
+        <div class="floating match-box">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=300&auto=format&fit=crop" alt="">
+          <div>
+            <strong>New Match! 🎉</strong>
+            <div class="small">James, 29</div>
+          </div>
+        </div>
 
-        // Опционально: автоматический редирект через N секунд
-        if (AUTO_REDIRECT_SECONDS > 0) {
-            setTimeout(function() {
-                document.getElementById('loadingOverlay').classList.add('active');
-                setTimeout(function() {
-                    window.location.href = OFFER_URL;
-                }, REDIRECT_DELAY);
-            }, AUTO_REDIRECT_SECONDS * 1000);
-        }
+        <div class="floating typing">
+          💬 Typing...
+        </div>
 
-        // Опционально: трекинг источника трафика
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        }
+        <div class="floating online">
+          🟢 243 online near you
+        </div>
 
-        // Добавляем UTM-метки или subid к оффер URL
-        var source = getUrlParameter('source') || getUrlParameter('utm_source') || 'direct';
-        var campaign = getUrlParameter('campaign') || getUrlParameter('utm_campaign') || '';
+        <div class="phone">
 
-        // Обновляем OFFER_URL с параметрами (раскомменть если нужно)
-        // if (source) {
-        //     OFFER_URL += '&source=' + source;
-        // }
-        // if (campaign) {
-        //     OFFER_URL += '&campaign=' + campaign;
-        // }
+          <div class="card-image">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop" alt="">
+            <div class="overlay"></div>
+          </div>
 
-        // Случайная онлайн-статистика (для реалистичности)
-        function updateOnlineCount() {
-            var baseCount = 3800;
-            var variation = Math.floor(Math.random() * 100);
-            var newCount = baseCount + variation;
-            var onlineStatus = document.querySelector('.online-status');
-            if (onlineStatus) {
-                onlineStatus.innerHTML = '<span class="pulse-dot"></span><strong>' +
-                    newCount.toLocaleString() + ' singles online now</strong> in your area';
-            }
-        }
+          <div class="profile-info">
+            <h2>Emma, 26</h2>
+            <p>📍 New York</p>
+            <p>Love hiking & coffee ☕</p>
+          </div>
 
-        // Обновляем каждые 10 секунд
-        setInterval(updateOnlineCount, 10000);
-    </script>
+          <div class="actions">
+            <div class="action">✕</div>
+            <div class="action heart">❤</div>
+            <div class="action">☆</div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section" id="how">
+
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">Three steps to your<br><span class="gradient">perfect match.</span></h2>
+      <p class="section-sub">Our AI does the heavy lifting so you can focus on the spark.</p>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-icon">🎭</div>
+          <h3>Create Your Profile</h3>
+          <p>Tell us who you are — your vibe, your passions, what makes you laugh at 2 AM. Takes under 2 minutes.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-icon">🤖</div>
+          <h3>AI Finds Your Match</h3>
+          <p>Our model analyzes 200+ compatibility signals — not just looks, but values, humor, and life goals.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-icon">💬</div>
+          <h3>Start the Conversation</h3>
+          <p>Break the ice with AI-suggested openers or dive in your own way. Real chemistry starts here.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section" id="testimonials">
+
+      <div class="section-label">Success Stories</div>
+      <h2 class="section-title">They found love.<br><span class="gradient">You're next.</span></h2>
+      <p class="section-sub">Over 850,000 couples started here. Here's what a few of them said.</p>
+
+      <div class="cards-row">
+
+        <div class="tcard">
+          <div class="stars">★★★★★</div>
+          <p class="quote">"I'd given up on dating apps. Spark matched me with Daniel in the first week and now we're moving in together. I still can't believe it."</p>
+          <div class="author">
+            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=200&auto=format&fit=crop" alt="">
+            <div>
+              <strong>Sofia, 28</strong>
+              <span>Los Angeles</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tcard">
+          <div class="stars">★★★★★</div>
+          <p class="quote">"The AI matching is genuinely scary good. My first match was so aligned with me it felt like the algorithm read my diary."</p>
+          <div class="author">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" alt="">
+            <div>
+              <strong>Marcus, 31</strong>
+              <span>New York</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tcard">
+          <div class="stars">★★★★★</div>
+          <p class="quote">"Zero creeps, zero ghosting. Spark's safety filters actually work and the people here are looking for something real."</p>
+          <div class="author">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="">
+            <div>
+              <strong>Priya, 26</strong>
+              <span>London</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="register">
+      <div class="cta-box">
+        <h2>Your person is<br><span class="gradient">already here.</span></h2>
+        <p>Join free today. No credit card. No games. Just connection.</p>
+        <a href="#register" class="btn" style="font-size:18px;padding:18px 40px;" onclick="qp('track','Generic')">Create Free Account →</a>
+      </div>
+    </section>
+
+  </div>
+
 </body>
 </html>
